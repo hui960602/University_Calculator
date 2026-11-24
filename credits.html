@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graduation Credits | University Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">University Calculator</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="split.html">Split</a>
+      <a href="gpa.html">GPA</a>
+      <a href="final.html">Final Score</a>
+      <a href="credits.html" class="active">Credits</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Graduation <span class="hl">Credits</span></h1>
+    <p class="subtitle">Tick the courses you have taken and see how far you are from graduation.</p>
+
+    <!-- Program -->
+    <section class="card">
+      <h2>Program</h2>
+      <select id="mode">
+        <option value="yzu-ib">YZU International Bachelor Program in Informatics (admitted 2025)</option>
+        <option value="custom">Custom (other programs)</option>
+      </select>
+    </section>
+
+    <!-- ========== YZU International Bachelor Program in Informatics ========== -->
+    <div id="yzu-area">
+      <section class="card">
+        <p class="hint chip-legend">
+          Tap a course to change its status:
+          <span class="course-chip">Not taken</span>
+          <span class="course-chip done">Completed</span>
+          <span class="course-chip now">In progress</span>
+        </p>
+        <p class="hint">128 credits to graduate: Common Compulsory 17, General Education 10, College Compulsory 4, Required Courses 54, Electives 43.</p>
+      </section>
+
+      <section class="card">
+        <h2>Required Courses (54 credits)</h2>
+        <div class="field">
+          <span class="field-label">Practical Training or Special Project (complete one series)</span>
+          <label class="check"><input type="radio" name="series" value="project" checked> Special Project</label>
+          <label class="check"><input type="radio" name="series" value="intern"> Practical Training</label>
+          <p class="hint" id="series-note"></p>
+        </div>
+        <div id="dept-list"></div>
+      </section>
+
+      <section class="card">
+        <h2>College Compulsory (4 credits)</h2>
+        <div id="college-list" class="chip-wrap"></div>
+      </section>
+
+      <section class="card">
+        <h2>Common Compulsory (17 credits)</h2>
+        <div id="common-list" class="chip-wrap"></div>
+      </section>
+
+      <section class="card">
+        <h2>General Education (10 credits)</h2>
+        <p class="hint">2 credits from each of the four categories, plus 2 interdisciplinary credits that must also come from the four categories. All courses must be taught in English. Credits above 10 are not counted.</p>
+        <div id="ge-list" class="chip-wrap"></div>
+      </section>
+
+      <section class="card">
+        <h2>Electives (43 credits)</h2>
+        <p class="hint">Of the 43 elective credits: at least 18 from this program, at least 12 from the College of Informatics, and at most 13 free electives. Program electives are listed below; add courses from other departments under "Other electives".</p>
+        <div id="elective-list"></div>
+        <div class="field outside-field">
+          <span class="field-label">Other electives</span>
+          <p class="hint">Courses from other departments in the College of Informatics count as college electives. Courses from other colleges count as free electives.</p>
+          <div class="outside-form">
+            <input type="text" id="out-name" placeholder="Course name, e.g. Database Practice">
+            <input type="number" id="out-credit" min="1" max="10" step="1" placeholder="Credits">
+            <select id="out-type">
+              <option value="college">College of Informatics</option>
+              <option value="free">Other college (free elective)</option>
+            </select>
+            <select id="out-status">
+              <option value="done">Completed</option>
+              <option value="now">In progress</option>
+            </select>
+            <button class="primary" id="out-add-btn" type="button">Add</button>
+          </div>
+          <p class="error" id="out-error"></p>
+          <div id="outside-list" class="chip-wrap"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Other graduation requirements</h2>
+
+        <div class="field">
+          <span class="field-label">Programming Proficiency Test (CPE)</span>
+          <label class="check"><input type="checkbox" id="cpe"> Passed (2 correct in one exam, or 3 in total)</label>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Physical Education (4 semesters)</span>
+          <div class="input-row">
+            <select id="pe-done">
+              <option value="0">0 semesters completed</option>
+              <option value="1">1 semester completed</option>
+              <option value="2">2 semesters completed</option>
+              <option value="3">3 semesters completed</option>
+              <option value="4">4 semesters completed</option>
+            </select>
+          </div>
+          <label class="check"><input type="checkbox" id="pe-now"> Taking PE this semester</label>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Service Learning hours (18 each)</span>
+          <div class="two-col" id="service-hours">
+            <label>Course hours <input type="number" id="service-course" min="0" placeholder="0"></label>
+            <label>Activity hours <input type="number" id="service-activity" min="0" placeholder="0"></label>
+          </div>
+          <p class="saved" id="service-done-note"></p>
+        </div>
+
+        <div class="field">
+          <span class="field-label">English Listening and Reading</span>
+          <label class="check"><input type="checkbox" id="toeic750"> TOEIC 750 or above (or English is an official language of my passport country), so not required</label>
+          <p class="hint" id="listening-note"></p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========== Custom ========== -->
+    <div id="custom-area" class="hidden">
+      <section class="card">
+        <h2>Credit categories</h2>
+        <p class="hint">"Required" comes from your program's graduation requirements. "Done" is what you have completed. "Now" is what you are taking this semester.</p>
+        <div class="credit-head">
+          <span>Category</span><span>Required</span><span>Done</span><span>Now</span><span></span>
+        </div>
+        <div id="category-list"></div>
+        <div class="btn-row">
+          <button id="add-category-btn">+ Add category</button>
+          <button id="example-btn">Fill example</button>
+          <button class="danger" id="clear-category-btn">Clear all</button>
+        </div>
+      </section>
+    </div>
+
+    <p class="error" id="credit-error"></p>
+
+    <!-- Progress -->
+    <section class="card">
+      <h2>Progress</h2>
+      <div id="progress-result"></div>
+    </section>
+
+    <!-- Semesters left -->
+    <section class="card">
+      <h2>Semesters left</h2>
+      <div class="field">
+        <label class="field-label" for="per-semester">Credits you plan to take each semester</label>
+        <input type="number" id="per-semester" min="1" max="30" step="1" placeholder="e.g. 20">
+      </div>
+      <div id="semester-result"></div>
+      <p class="source">
+        Sources: YZU International Bachelor Program in Informatics List of Required Courses and List of Elective Courses, YZU List of Required Common Courses (for students admitted in 2025);
+        <a href="https://announce.yzu.edu.tw/files/aa/aaregi/學則1150703.pdf" target="_blank">YZU Academic Regulations, Article 13</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    University Calculator · Everything you need to calculate in university
+  </footer>
+
+  <script src="credits.js"></script>
+</body>
+</html>

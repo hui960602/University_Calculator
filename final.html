@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Score Planner | University Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">University Calculator</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="split.html">Split</a>
+      <a href="gpa.html">GPA</a>
+      <a href="final.html" class="active">Final Score</a>
+      <a href="credits.html">Credits</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Final Score <span class="hl">Planner</span></h1>
+    <p class="subtitle">Enter the weight of each grading item and the scores you already have. See the minimum you need on what's left.</p>
+
+    <!-- 1. Grading items -->
+    <section class="card">
+      <h2>1. Grading items</h2>
+      <p class="hint">Leave the score blank for anything you haven't taken yet.</p>
+      <div class="item-head">
+        <span>Item</span><span>Weight %</span><span>Score</span><span></span>
+      </div>
+      <div id="item-list"></div>
+      <p class="hint" id="weight-sum"></p>
+      <p class="error" id="final-error"></p>
+      <div class="btn-row">
+        <button id="add-item-btn">+ Add item</button>
+        <button class="danger" id="reset-item-btn">Reset</button>
+      </div>
+    </section>
+
+    <!-- 2. Target -->
+    <section class="card">
+      <h2>2. Target grade</h2>
+      <div class="target-row" id="target-row">
+        <button type="button" data-target="60" class="target-btn">Pass 60</button>
+        <button type="button" data-target="70" class="target-btn">70</button>
+        <button type="button" data-target="80" class="target-btn">80</button>
+        <button type="button" data-target="90" class="target-btn">90</button>
+        <input type="number" id="target" min="1" max="100" step="1" aria-label="Custom target">
+      </div>
+    </section>
+
+    <!-- 3. Result -->
+    <section class="card">
+      <h2>3. Result</h2>
+      <div id="final-result"></div>
+    </section>
+
+    <section class="card">
+      <h2>How it works</h2>
+      <p>Semester grade = sum of (score × weight) for every item.</p>
+      <p>The points you already have are added up first. The gap to your target is then divided by the weight that's left, which gives the average score you need on the remaining items.</p>
+      <p class="hint">If more than one item is left, the result is the average you need across them. Bonus points or curves from the teacher are not included.</p>
+    </section>
+  </main>
+
+  <footer>
+    University Calculator · Everything you need to calculate in university
+  </footer>
+
+  <script src="final.js"></script>
+</body>
+</html>
